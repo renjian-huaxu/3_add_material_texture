@@ -11,7 +11,12 @@ import MeshFaceColorFillMaterial from "../materials/MeshFaceColorFillMaterial";
 import MeshFaceColorStrokeMaterial from "../materials/MeshFaceColorStrokeMaterial";
 import Mesh from "../objects/Mesh";
 
-var _canvas = document.createElement('canvas'), _gl, _program, _viewMatrix = new Matrix4(), _normalMatrix;
+var _canvas = document.createElement('canvas'), 
+    _gl, 
+    _program,
+    _viewMatrix = new Matrix4(), 
+    _normalMatrix;
+
 var COLORFILL = 0, COLORSTROKE = 1, FACECOLORFILL = 2, FACECOLORSTROKE = 3, BITMAP = 4;
 
 export default class WebGLRenderer {
@@ -82,17 +87,14 @@ export default class WebGLRenderer {
     }
 
     createBuffers(object, materialFace) {
-        var lineArray,
-            vertexArray, faceArray, colorArray, normalArray, vertexIndex,
-            uvArray, materialFace;
 
-        vertexArray = [];
-        faceArray = [];
-        colorArray = [];
-        normalArray = [];
-        uvArray = [];
-        lineArray = [];
-        vertexIndex = 0;
+        const vertexArray = [];
+        const faceArray = [];
+        const colorArray = [];
+        const normalArray = [];
+        const uvArray = [];
+        const lineArray = [];
+        let vertexIndex = 0;
 
         //log( "object.geometry.uvs: " + object.geometry.uvs.length + " " + object.geometry.uvs);
 
