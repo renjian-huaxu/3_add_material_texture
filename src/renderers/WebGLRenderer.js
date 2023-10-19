@@ -39,7 +39,7 @@ export default class WebGLRenderer {
     }
 
 
-    setupLights(scene) {
+    setupLights(scene, camera) {
         let lightColor, lightPosition;
 
         //lighting
@@ -383,7 +383,7 @@ export default class WebGLRenderer {
         }
     }
 
-    render() {
+    render( scene, camera ) {
 		
         if (this.autoClear) {
 

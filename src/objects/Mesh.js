@@ -18,6 +18,7 @@ export default class Mesh extends Object3D {
         this.materialFaces = {};
 
         this.sortFacesByMaterial();
+        
         if (normUVs) this.normalizeUVs();
 
         this.geometry.computeBoundingBox();
