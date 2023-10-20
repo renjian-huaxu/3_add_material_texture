@@ -26,6 +26,7 @@ import MeshColorFillMaterial from "./materials/MeshColorFillMaterial";
 import MeshFaceColorFillMaterial from "./materials/MeshFaceColorFillMaterial";
 import MeshBitmapUVMappingMaterial  from "./materials/MeshBitmapUVMappingMaterial";
 import MeshColorStrokeMaterial  from "./materials/MeshColorStrokeMaterial";
+import MeshFaceColorStrokeMaterial  from "./materials/MeshFaceColorStrokeMaterial";
 
 import Scene from "./scenes/Scene";
 
@@ -65,6 +66,7 @@ export default {
     MeshFaceColorFillMaterial,
     MeshBitmapUVMappingMaterial,
     MeshColorStrokeMaterial,
+    MeshFaceColorStrokeMaterial,
 
     Scene,
 

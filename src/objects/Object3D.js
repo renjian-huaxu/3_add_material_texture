@@ -4,7 +4,7 @@ import Matrix4 from '../core/Matrix4'
 
 export default class Object3D {
 
-    constructor(material) {
+    constructor() {
         this.position = new Vector3();
         this.rotation = new Vector3();
         this.scale = new Vector3( 1, 1, 1 );
