@@ -135,6 +135,7 @@ export default class Vector3 {
     distanceToSquared(v) {
 
       var dx = this.x - v.x, dy = this.y - v.y, dz = this.z - v.z;
+
 		  return dx * dx + dy * dy + dz * dz;
     
     }
@@ -178,6 +179,7 @@ export default class Vector3 {
     isZero()  {
 
       var almostZero = 0.0001;
+      
       return ( Math.abs( this.x ) < almostZero ) && ( Math.abs( this.y ) < almostZero ) && ( Math.abs( this.z ) < almostZero );
 
     }

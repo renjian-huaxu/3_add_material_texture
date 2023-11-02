@@ -21,7 +21,7 @@
 
         var camera;
         var scene;
-        var canvasRenderer, webglRenderer;
+        var webglRenderer;
 
         var mesh, zmesh, geometry;
         
@@ -121,15 +121,9 @@
             var pointLight = new MThree.PointLight( 0xff0000, 1 );
             scene.addLight( pointLight );
 
-
-            try {
-                webglRenderer = new MThree.WebGLRenderer();
-                webglRenderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
-                container.appendChild( webglRenderer.domElement );
-                has_gl = 1;
-            }
-            catch (e) {
-            }
+            webglRenderer = new MThree.WebGLRenderer();
+            webglRenderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
+            container.appendChild( webglRenderer.domElement );
 
             function createModel() {
                 

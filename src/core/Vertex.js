@@ -5,6 +5,7 @@ export default class Vertex {
     __visible = true;
 
     constructor(position, normal) {
+
         this.position = position || new Vector3();
         this.positionWorld = new Vector3();
         this.positionScreen = new Vector3();
@@ -14,6 +15,7 @@ export default class Vertex {
         this.normalScreen = new Vector3();
     
         this.__visible = true;
+        
     }
 
     toString() {

@@ -9,7 +9,9 @@ export default class MeshFaceColorStrokeMaterial {
     }
 
     toString() {
+
         return 'THREE.LineColorMaterial: ' + 'lineWidth: ' + this.lineWidth + ' )';
+        
     }
 
 }

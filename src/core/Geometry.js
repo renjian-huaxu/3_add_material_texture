@@ -13,6 +13,7 @@ export default class Geometry {
     }
 
 	computeCentroids() {
+
         this.faces.forEach(face => {
             
             face.centroid.set( 0, 0, 0 );
@@ -37,10 +38,13 @@ export default class Geometry {
 	}
 
     computeNormals(useVertexNormals) {
+
         var vA, vB, vC, cb = new Vector3(), ab = new Vector3();
 
         this.vertices.forEach(vertex => {
+
 			vertex.normal.set( 0, 0, 0 );
+
         })
 
         this.faces.forEach(face => {
@@ -92,6 +96,7 @@ export default class Geometry {
     }
 
 	computeBoundingBox() {
+        
 		if ( this.vertices.length > 0 ) {
             
             this.bbox = { 'x': [ this.vertices[ 0 ].position.x, this.vertices[ 0 ].position.x ], 
@@ -121,6 +126,8 @@ export default class Geometry {
 	}
 
 	toString() {
+
 		return 'MGeometry ( vertices: ' + this.vertices + ', faces: ' + this.faces + ' )';
+
 	}
 }

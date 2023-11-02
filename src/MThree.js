@@ -2,7 +2,6 @@ import Color from "./core/Color";
 import Vector2 from "./core/Vector2";
 import Vector3 from "./core/Vector3";
 import Vector4 from "./core/Vector4";
-import Rectangle from "./core/Rectangle";
 import Matrix4 from "./core/Matrix4";
 import Vertex from "./core/Vertex";
 import Face3 from "./core/Face3";
@@ -42,7 +41,6 @@ export default {
     Vector2,
     Vector3,
     Vector4,
-    Rectangle,
     Matrix4,
     Vertex,
     Face3,

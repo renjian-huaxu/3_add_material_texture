@@ -27,22 +27,29 @@ export default class WebGLRenderer {
     autoClear = true
 
     constructor() {
+
         this.initGL()
         this.initProgram()
+
     }
 
     setSize(width, height) {
+
         _canvas.width = width;
         _canvas.height = height;
         _gl.viewport(0, 0, _canvas.width, _canvas.height);
+
     }
 
     clear() {
+
         _gl.clear(_gl.COLOR_BUFFER_BIT | _gl.DEPTH_BUFFER_BIT);
+
     }
 
 
     setupLights(scene, camera) {
+        
         let lightColor, lightPosition;
 
         //lighting
@@ -259,13 +266,12 @@ export default class WebGLRenderer {
     }
 
     renderMesh(object, camera) {
-        var material, materialFace, color, lineWidth;
-
         // create separate VBOs per material
-        for (var m in object.materialFaces) {
+        for (let m in object.materialFaces) {
 
-            materialFace = object.materialFaces[m];
-            material = object.materials[m];
+            const materialFace = object.materialFaces[m];
+            const material = object.materials[m];
+            
             if (!material) continue;
             //log(material);
 
@@ -276,6 +282,8 @@ export default class WebGLRenderer {
             }
 
             object.materials.forEach((material, mIndex) => {
+                let color, lineWidth;
+
                 if (material instanceof MeshBitmapUVMappingMaterial &&
                     !(mIndex == m || m == material.decalIndex)) {
 
@@ -420,8 +428,8 @@ export default class WebGLRenderer {
 
         }
 
-        _gl.clearColor(0, 0, 0, 1);
-        _gl.clearDepth(1);
+        // _gl.clearColor(0, 0, 0, 1);
+        // _gl.clearDepth(1);
 
         _gl.enable(_gl.DEPTH_TEST);
         _gl.depthFunc(_gl.LEQUAL);
@@ -435,44 +443,6 @@ export default class WebGLRenderer {
     initProgram() {
 
         _program = _gl.createProgram();
-
-        _gl.attachShader(_program, this.getShader("fragment", [
-            "#ifdef GL_ES",
-            "precision highp float;",
-            "#endif",
-
-            "uniform sampler2D diffuse;",
-
-            "uniform vec4 uniformColor;",
-
-            "varying vec2 vertexUv;",
-            "varying vec4 vertexColor;",
-            "varying vec3 lightWeighting;",
-
-            "varying vec3 vNormal;",
-
-            "uniform int material;", // 0 - ColorFill, 1 - ColorStroke, 2 - FaceColorFill, 3 - FaceColorStroke, 4 - Bitmap
-
-            "void main(){",
-				"if(material==4) {", // texture
-					"vec4 texelColor = texture2D(diffuse, vertexUv);",
-					"gl_FragColor = vec4(texelColor.rgb * lightWeighting, texelColor.a);",
-
-				"} else if(material==3) {", // wireframe using vertex color 
-					"gl_FragColor = vec4(vertexColor.rgb * lightWeighting, vertexColor.a);",
-
-				"} else if(material==2) {", // triangle using vertex color
-					"gl_FragColor = vec4(vertexColor.rgb * lightWeighting, vertexColor.a);",
-
-				"} else if(material==1) {", // wireframe using uniform color
-					"gl_FragColor = vec4(uniformColor.rgb * lightWeighting, uniformColor.a);",
-
-				"} else {", // triangle using uniform color
-					"gl_FragColor = vec4(uniformColor.rgb * lightWeighting, uniformColor.a);",
-				//"gl_FragColor = vec4(vNormal, 1.0);",
-				"}",
-            "}"
-        ].join("\n")));
 
         _gl.attachShader(_program, this.getShader("vertex", [
             "attribute vec3 position;",
@@ -504,7 +474,7 @@ export default class WebGLRenderer {
 				"vec4 mPosition = objMatrix * vec4( position, 1.0 );",
 				"vec3 transformedNormal = normalize(normalMatrix * normal);",
 
-				"if(!enableLighting) {",
+				"if (!enableLighting) {",
 					"lightWeighting = vec3(1.0, 1.0, 1.0);",
 				"} else {",
 					"vec3 pointLight = normalize(pointPosition.xyz - mPosition.xyz);",
@@ -520,6 +490,45 @@ export default class WebGLRenderer {
 				"gl_Position = projectionMatrix * mvPosition;",
 
             "}"].join("\n")));
+
+
+        _gl.attachShader(_program, this.getShader("fragment", [
+            "#ifdef GL_ES",
+            "precision highp float;",
+            "#endif",
+
+            "uniform sampler2D diffuse;",
+
+            "uniform vec4 uniformColor;",
+
+            "varying vec2 vertexUv;",
+            "varying vec4 vertexColor;",
+            "varying vec3 lightWeighting;",
+
+            "varying vec3 vNormal;",
+
+            "uniform int material;", // 0 - ColorFill, 1 - ColorStroke, 2 - FaceColorFill, 3 - FaceColorStroke, 4 - Bitmap
+
+            "void main(){",
+				"if (material==4) {", // texture
+					"vec4 texelColor = texture2D(diffuse, vertexUv);",
+					"gl_FragColor = vec4(texelColor.rgb * lightWeighting, texelColor.a);",
+
+				"} else if (material==3) {", // wireframe using vertex color 
+					"gl_FragColor = vec4(vertexColor.rgb * lightWeighting, vertexColor.a);",
+
+				"} else if (material==2) {", // triangle using vertex color
+					"gl_FragColor = vec4(vertexColor.rgb * lightWeighting, vertexColor.a);",
+
+				"} else if (material==1) {", // wireframe using uniform color
+					"gl_FragColor = vec4(uniformColor.rgb * lightWeighting, uniformColor.a);",
+
+				"} else {", // triangle using uniform color
+					"gl_FragColor = vec4(uniformColor.rgb * lightWeighting, uniformColor.a);",
+				//"gl_FragColor = vec4(vNormal, 1.0);",
+				"}",
+            "}"
+        ].join("\n")));
 
         _gl.linkProgram(_program);
 
